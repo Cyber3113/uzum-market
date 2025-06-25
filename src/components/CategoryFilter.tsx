@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 interface CategoryFilterProps {
@@ -29,18 +30,28 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({
           Barchasi
         </Button>
         {categories.map((category) => (
-          <Button
-            key={category}
-            variant={selectedCategory === category ? 'default' : 'outline'}
-            onClick={() => onCategoryChange(category)}
-            className={`transition-all duration-300 ${
-              selectedCategory === category
-                ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
-                : 'hover:bg-gray-100'
-            }`}
-          >
-            {category}
-          </Button>
+          <div key={category} className="flex flex-col items-center gap-2">
+            <Button
+              variant={selectedCategory === category ? 'default' : 'outline'}
+              onClick={() => onCategoryChange(category)}
+              className={`transition-all duration-300 ${
+                selectedCategory === category
+                  ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg'
+                  : 'hover:bg-gray-100'
+              }`}
+            >
+              {category}
+            </Button>
+            <Link to={`/category/${category.toLowerCase()}`}>
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-xs text-blue-600 hover:text-blue-800 underline"
+              >
+                Barchasini ko'rish
+              </Button>
+            </Link>
+          </div>
         ))}
       </div>
     </div>
